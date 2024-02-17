@@ -20,8 +20,8 @@ A similiarity matrix is first computed to quantify the correlation between an in
 A binary assignment problem is solved in which individual pFC matrices are matched to individual eFC matrices. The Hungarian algorithm is used to compute an optimal individual matching. The proportion of individuals correctly matched (i.e. pFC-eFC matching) is compared to a null condition. Exceedance of the null condition suggests that individual pFC matrices capture individual effects beyond chance levels.  
 
 # Data
-SC, eFC and pFC matrices for 1000 individuals comprising the Human Connectome Project are stored in full_data_withpFCs.mat 
+SC, eFC and pFC matrices for 1000 individuals comprising the Human Connectome Project (HCP) are stored in full_data_with_pFCs.mat 
 
-Due to HCP restrictions, this data file is not available. 
+This data file contains derivatives from diffusion and functional MRI data made available by the HCP via ConnectomeDB (www.humanconnectome.org) and it is not made available here. 
 
 ![image](https://github.com/AndrewZalesky/SC-FC-prediction/assets/57614210/91de1ce9-5706-4863-acab-e8f2f11979a2)
