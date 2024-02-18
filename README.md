@@ -2,7 +2,7 @@
 MATLAB implementations of two measures to statistically evaluate the extent to which functional connectivity (FC) predictions derived from an individual's structural connectome (SC) capture individual-specific effects. 
 
 # Background
-Several recent studies have optimized deep neural networks to learn high-dimensional relationships linking structural and functional connectivity across the human connectome. However, the extent to which these models recapitulate individual-specific characteristics of resting-state functional brain networks remains unclear. We provide two measures and associated benchmark/null conditions to evaluate the extend to which an individual's predicted FC captures individual effects. 
+Several recent studies have optimized deep neural networks to learn high-dimensional relationships linking structural and functional connectivity across the human connectome. However, the extent to which these models recapitulate individual-specific characteristics of resting-state functional brain networks remains unclear. We provide two measures and associated benchmark/null conditions to evaluate the extent to which an individual's predicted FC captures individual effects. 
 
 For further details, see Zalesky et al, Predicting an individual’s functional connectivity from their structural connectome: Evaluation of evidence, recommendations and future prospects. 
 
