@@ -1,4 +1,4 @@
-%Measure 1
+%Measure 2
 %Matching individuals based on eFC and pFC. Involves solution of a binary
 %assignment problem using the Hungarian algorithm. Statistical testing of
 %whether the number of individuals correctly assigned in significantly
@@ -57,8 +57,8 @@ if CV==0 %no cross-validation
 else   %cross-validation based standardization
     mean_efc=zeros(N,J); 
     for i=1:length(cv)
-        ind_test=setdiff(1:N,cv{i});
-        ind_train=cv{i};
+        ind_train=setdiff(1:N,cv{i});
+        ind_test=cv{i};
         mu_efc=mean(efc(ind_train,:)); std_efc=std(efc(ind_train,:));
         mu_nnfc=mean(nnfc(ind_train,:)); std_nnfc=std(nnfc(ind_train,:));
         mu_bmfc=mean(bmfc(ind_train,:)); std_bmfc=std(bmfc(ind_train,:));
@@ -113,17 +113,26 @@ cnt_null=zeros(Trials,length(vals));
 
 %Select null type
 NullType=1; 
-%1: similarity matric replaced with a random matrix
+%1: similarity matrix replaced with a random matrix
 %2: rows (or columns) of r_pFC permuted
 
 frst=0; 
 for t=1:Trials %average results over multiple trials
-    ind_rand=randperm(N); %samples a random ordering of individuals
+    ind_cv=randperm(length(cv)); ind_cv=ind_cv(1); %select a random cv fold
+    ind_rand=cv{ind_cv}(randperm(length(cv{ind_cv}))); %randomize individuals in the chosen fold 
     if NullType==1
         r_null=randn(N,N); %generate a random similarity matching
-    elseif NullType==2
-        r_null=r_pFC; 
-        r_null=r_null(:,randperm(N)); %permute columns (or rows) 
+    elseif NullType==2    
+        r_null=zeros(N,N);
+        %Permute within folds
+        for j=1:length(cv)
+            tmp=r_pFC(:,cv{j}); 
+            tmp=tmp(:,randperm(length(cv{j}))); %permute columns within fold
+            r_null(:,cv{j})=tmp; %insert into full similarity matrix
+        end
+        %Unconstrained permutation
+        %r_null=r_pFC;
+        %r_null=r_null(:,randperm(N)); %permute columns (or rows) 
     end
     for i=1:length(vals)
         ind=ind_rand(1:vals(i)); %Sample a subset of individuals
@@ -173,3 +182,4 @@ for i=1:length(vals)
         text(vals(i),2,'$$\ast$$','Interpreter','latex'); 
     end
 end
+ha=gca; ha.FontSize=16;  
